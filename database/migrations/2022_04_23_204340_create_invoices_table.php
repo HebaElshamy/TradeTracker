@@ -16,14 +16,15 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_no')->nullable();
+            $table->string('transaction_type');
             $table->date('date')->nullable();
-            $table->text('description')->nullable(); 
+            $table->text('description')->nullable();
             $table->tinyInteger('status')->default('0')->comment('0=Pending, 1=Approved');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
         });
-    } 
+    }
 
     /**
      * Reverse the migrations.

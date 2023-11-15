@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Validation\Rules;
 
 class AdminController extends Controller
 {
@@ -18,12 +21,12 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         $notification = array(
-            'message' => 'User Logout Successfully', 
+            'message' => 'User Logout Successfully',
             'alert-type' => 'success'
         );
 
         return redirect('/login')->with($notification);
-    } // End Method 
+    } // End Method
 
 
     public function Profile(){
@@ -31,7 +34,7 @@ class AdminController extends Controller
         $adminData = User::find($id);
         return view('admin.admin_profile_view',compact('adminData'));
 
-    }// End Method 
+    }// End Method
 
 
     public function EditProfile(){
@@ -39,7 +42,7 @@ class AdminController extends Controller
         $id = Auth::user()->id;
         $editData = User::find($id);
         return view('admin.admin_profile_edit',compact('editData'));
-    }// End Method 
+    }// End Method
 
     public function StoreProfile(Request $request){
         $id = Auth::user()->id;
@@ -58,7 +61,7 @@ class AdminController extends Controller
         $data->save();
 
         $notification = array(
-            'message' => 'Admin Profile Updated Successfully', 
+            'message' => 'Admin Profile Updated Successfully',
             'alert-type' => 'info'
         );
 
@@ -97,8 +100,71 @@ class AdminController extends Controller
         }
 
     }// End Method
+    public function index(){
+        $admins = User::latest()->get();
+       
+        return view('admin.admins.admin_all',compact('admins'));
+    }
+    public function create(){
+        //
+        return view('admin.admins.admin_add');
+    }
+
+    public function store(Request $request) {
+
+
+
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'username' => ['required', 'string','max:255', 'unique:users'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+            $user = User::create([
+                'name' => $request->name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            $notification = [
+                'message' => 'Admin Inserted Successfully',
+                'alert-type' => 'success'
+            ];
+
+
+
+
+        return redirect()->route('dashboard')->with($notification);
+    }
+
+    public function AdminDelete($id){
+        $user = User::findOrFail($id);
+        // dd(Auth::id());
+
+        if ($id == Auth::id()) {
+
+            $notification = array(
+                'message' => 'Cannot delete an admin user',
+                'alert-type' => 'error'
+            );
+
+            return redirect()->route('dashboard')->with($notification);
+        }
+
+
+        $user->delete();
+
+        $notification = array(
+            'message' => 'Admin Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('dashboard')->with($notification);
+    }
+
+
 
 
 
 }
- 

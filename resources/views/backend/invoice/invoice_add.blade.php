@@ -8,10 +8,10 @@
 <div class="row">
 <div class="col-12">
     <div class="card">
-        <div class="card-body"> 
+        <div class="card-body">
 
             <h4 class="card-title">Add Invoice  </h4><br><br>
-             
+
 
     <div class="row">
 
@@ -29,7 +29,7 @@
                  <input class="form-control example-date-input" value="{{ $date }}" name="date" type="date"  id="date">
             </div>
         </div>
- 
+
 
        <div class="col-md-3">
             <div class="md-3">
@@ -66,7 +66,7 @@
 <div class="col-md-2">
     <div class="md-3">
         <label for="example-text-input" class="form-label" style="margin-top:43px;">  </label>
-        
+
 
         <i class="btn btn-secondary btn-rounded waves-effect waves-light fas fa-plus-circle addeventmore"> Add More</i>
     </div>
@@ -76,8 +76,8 @@
 
 
 
-    </div> <!-- // end row  --> 
-           
+    </div> <!-- // end row  -->
+
         </div> <!-- End card-body -->
 <!--  ---------------------------------- -->
 
@@ -90,15 +90,15 @@
                         <th>Category</th>
                         <th>Product Name </th>
                         <th width="7%">PSC/KG</th>
-                        <th width="10%">Unit Price </th> 
+                        <th width="10%">Unit Price </th>
                         <th width="15%">Total Price</th>
-                        <th width="7%">Action</th> 
+                        <th width="7%">Action</th>
 
                     </tr>
                 </thead>
 
                 <tbody id="addRow" class="addRow">
-                    
+
                 </tbody>
 
                 <tbody>
@@ -118,7 +118,7 @@
                         <td></td>
                     </tr>
 
-                </tbody>                
+                </tbody>
             </table><br>
 
 
@@ -136,7 +136,7 @@
                         <option value="full_paid">Full Paid </option>
                         <option value="full_due">Full Due </option>
                          <option value="partial_paid">Partial Paid </option>
-                        
+
                     </select>
         <input type="text" name="paid_amount" class="form-control paid_amount" placeholder="Enter Paid Amount" style="display:none;">
                 </div>
@@ -151,7 +151,7 @@
                         @endforeach
                          <option value="0">New Customer </option>
                     </select>
-            </div> 
+            </div>
             </div> <!-- // end row --> <br>
 
 <!-- Hide Add Customer Form -->
@@ -173,9 +173,9 @@
  <br>
             <div class="form-group">
                 <button type="submit" class="btn btn-info" id="storeButton"> Invoice Store</button>
-                
+
             </div>
-            
+
         </form>
 
 
@@ -186,7 +186,7 @@
         </div> <!-- End card-body -->
 
 
- 
+
 
 
 
@@ -194,22 +194,22 @@
     </div>
 </div> <!-- end col -->
 </div>
- 
+
 
 
 </div>
 </div>
 
- 
+
 
 
 <script id="document-template" type="text/x-handlebars-template">
-     
+
 <tr class="delete_add_more_item" id="delete_add_more_item">
         <input type="hidden" name="date" value="@{{date}}">
         <input type="hidden" name="invoice_no" value="@{{invoice_no}}">
-        
-   
+
+
     <td>
         <input type="hidden" name="category_id[]" value="@{{category_id}}">
         @{{ category_name }}
@@ -221,17 +221,17 @@
     </td>
 
      <td>
-        <input type="number" min="1" class="form-control selling_qty text-right" name="selling_qty[]" value=""> 
+        <input type="number" min="1" class="form-control selling_qty text-right" name="selling_qty[]" value="">
     </td>
 
     <td>
-        <input type="number" class="form-control unit_price text-right" name="unit_price[]" value=""> 
+        <input type="number" class="form-control unit_price text-right" name="unit_price[]" value="">
     </td>
 
-  
+
 
      <td>
-        <input type="number" class="form-control selling_price text-right" name="selling_price[]" value="0" readonly> 
+        <input type="number" class="form-control selling_price text-right" name="selling_price[]" value="0" readonly>
     </td>
 
      <td>
@@ -247,7 +247,7 @@
     $(document).ready(function(){
         $(document).on("click",".addeventmore", function(){
             var date = $('#date').val();
-            var invoice_no = $('#invoice_no').val(); 
+            var invoice_no = $('#invoice_no').val();
             var category_id  = $('#category_id').val();
             var category_name = $('#category_id').find('option:selected').text();
             var product_id = $('#product_id').val();
@@ -258,7 +258,7 @@
                 $.notify("Date is Required" ,  {globalPosition: 'top right', className:'error' });
                 return false;
                  }
-                  
+
                   if(category_id == ''){
                 $.notify("Category is Required" ,  {globalPosition: 'top right', className:'error' });
                 return false;
@@ -273,7 +273,7 @@
                  var tamplate = Handlebars.compile(source);
                  var data = {
                     date:date,
-                    invoice_no:invoice_no, 
+                    invoice_no:invoice_no,
                     category_id:category_id,
                     category_name:category_name,
                     product_id:product_id,
@@ -281,7 +281,7 @@
 
                  };
                  var html = tamplate(data);
-                 $("#addRow").append(html); 
+                 $("#addRow").append(html);
         });
 
         $(document).on("click",".removeeventmore",function(event){
@@ -301,7 +301,7 @@
             totalAmountPrice();
         });
 
-        // Calculate sum of amout in invoice 
+        // Calculate sum of amout in invoice
 
         function totalAmountPrice(){
             var sum = 0;
@@ -318,13 +318,13 @@
                 }
 
             $('#estimated_amount').val(sum);
-        }  
+        }
 
     });
 
 
 </script>
- 
+
 
 <script type="text/javascript">
     $(function(){
@@ -346,7 +346,7 @@
     });
 
 </script>
- 
+
  <script type="text/javascript">
     $(function(){
         $(document).on('change','#product_id',function(){
@@ -355,7 +355,7 @@
                 url:"{{ route('check-product-stock') }}",
                 type: "GET",
                 data:{product_id:product_id},
-                success:function(data){                   
+                success:function(data){
                     $('#current_stock_qty').val(data);
                 }
             });
@@ -387,8 +387,8 @@
 
 </script>
 
- 
 
 
- 
-@endsection 
+
+
+@endsection

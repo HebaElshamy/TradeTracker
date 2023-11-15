@@ -19,7 +19,7 @@ class PurchaseController extends Controller
         $allData = Purchase::orderBy('date','desc')->orderBy('id','desc')->get();
         return view('backend.purchase.purchase_all',compact('allData'));
 
-    } // End Method 
+    } // End Method
 
 
     public function PurchaseAdd(){
@@ -29,7 +29,7 @@ class PurchaseController extends Controller
         $category = Category::all();
         return view('backend.purchase.purchase_add',compact('supplier','unit','category'));
 
-    } // End Method 
+    } // End Method
 
 
     public function PurchaseStore(Request $request){
@@ -37,14 +37,14 @@ class PurchaseController extends Controller
     if ($request->category_id == null) {
 
        $notification = array(
-        'message' => 'Sorry you do not select any item', 
+        'message' => 'Sorry you do not select any item',
         'alert-type' => 'error'
     );
     return redirect()->back( )->with($notification);
     } else {
 
         $count_category = count($request->category_id);
-        for ($i=0; $i < $count_category; $i++) { 
+        for ($i=0; $i < $count_category; $i++) {
             $purchase = new Purchase();
             $purchase->date = date('Y-m-d', strtotime($request->date[$i]));
             $purchase->purchase_no = $request->purchase_no[$i];
@@ -59,16 +59,17 @@ class PurchaseController extends Controller
 
             $purchase->created_by = Auth::user()->id;
             $purchase->status = '0';
+            $purchase->transaction_type = 'purchase';
             $purchase->save();
         } // end foreach
-    } // end else 
+    } // end else
 
     $notification = array(
-        'message' => 'Data Save Successfully', 
+        'message' => 'Data Save Successfully',
         'alert-type' => 'success'
     );
-    return redirect()->route('purchase.all')->with($notification); 
-    } // End Method 
+    return redirect()->route('purchase.all')->with($notification);
+    } // End Method
 
 
     public function PurchaseDelete($id){
@@ -76,19 +77,19 @@ class PurchaseController extends Controller
         Purchase::findOrFail($id)->delete();
 
          $notification = array(
-        'message' => 'Purchase Iteam Deleted Successfully', 
+        'message' => 'Purchase Iteam Deleted Successfully',
         'alert-type' => 'success'
     );
-    return redirect()->back()->with($notification); 
+    return redirect()->back()->with($notification);
 
-    } // End Method 
+    } // End Method
 
 
     public function PurchasePending(){
 
         $allData = Purchase::orderBy('date','desc')->orderBy('id','desc')->where('status','0')->get();
         return view('backend.purchase.purchase_pending',compact('allData'));
-    }// End Method 
+    }// End Method
 
 
     public function PurchaseApprove($id){
@@ -105,19 +106,19 @@ class PurchaseController extends Controller
             ]);
 
              $notification = array(
-        'message' => 'Status Approved Successfully', 
+        'message' => 'Status Approved Successfully',
         'alert-type' => 'success'
           );
-    return redirect()->route('purchase.all')->with($notification); 
+    return redirect()->route('purchase.all')->with($notification);
 
         }
 
-    }// End Method 
+    }// End Method
 
 
     public function DailyPurchaseReport(){
         return view('backend.purchase.daily_purchase_report');
-    }// End Method 
+    }// End Method
 
 
     public function DailyPurchasePdf(Request $request){
@@ -131,10 +132,9 @@ class PurchaseController extends Controller
         $end_date = date('Y-m-d',strtotime($request->end_date));
         return view('backend.pdf.daily_purchase_report_pdf',compact('allData','start_date','end_date'));
 
-    }// End Method 
+    }// End Method
 
 
 
 
 }
-  
