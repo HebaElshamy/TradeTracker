@@ -132,7 +132,7 @@
                    @forelse ($combinedResults as $key =>$combined)
                    <tr>
                     <td><h6 class="mb-0">{{$key+1}}</h6></td>
-                    <td>{{$combined->transaction_type}}</td>
+                    <td>{{ucfirst($combined->transaction_type)}}</td>
                     <td>
                         <div class="font-size-13"><i class="ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2"></i>Pending</div>
                     </td>
@@ -147,7 +147,7 @@
                    @empty
                    <tr class="odd"><td valign="top" colspan="6" class="dataTables_empty">No data available in table</td></tr>
                    @endforelse
-                    
+
 
                      <!-- end -->
                 </tbody><!-- end tbody -->
