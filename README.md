@@ -14,8 +14,10 @@ Welcome to our Inventory Management System built with Laravel. This project prov
 - Creation of sales invoices and purchase operations.
 - Daily reports for operations and inventory status.
 - Intuitive and user-friendly interface.
+## Explore More Features
+For a more in-depth exploration of the features, we invite you to experience the website firsthand. Take advantage of the interactive platform to discover additional functionalities that cater to your specific needs. Enjoy a comprehensive solution tailored to optimize your business processes.  
 
-Feel free to explore the system and utilize its features for efficient inventory management.
+
 
 ## Technologies Used
 
