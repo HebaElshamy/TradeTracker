@@ -1,5 +1,8 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
+![tradetracker-high-resolution-logo-transparent](https://github.com/HebaElshamy/TradeTracker/assets/46092804/30e7447c-a364-405d-893e-e393a132e314)
+
+
 # Inventory Management System with Laravel
 
 Welcome to our Inventory Management System built with Laravel. This project provides a comprehensive solution for managing suppliers, customers, products, as well as purchase and sales operations, along with inventory tracking.
@@ -45,11 +48,13 @@ Feel free to explore the system and utilize its features for efficient inventory
     ```bash
     php artisan db:seed --class=UsersTableSeeder
 9. To login as an admin, use the following credentials:
-
     Username: Admin
     Password: 123456789
 10. Enjoy your experience!
+    
+![dashboard](https://github.com/HebaElshamy/TradeTracker/assets/46092804/29c41a07-55fc-4b22-ad37-ba87a5114a3c)
 
+![invoice](https://github.com/HebaElshamy/TradeTracker/assets/46092804/7f3af888-ef95-4d96-98fd-76ed26981c6a)
 
-
+![purchase](https://github.com/HebaElshamy/TradeTracker/assets/46092804/746f2871-553d-4acd-8e35-84d4388e9e37)
 
